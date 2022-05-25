@@ -42,7 +42,9 @@ public class PalindromeTest {
      *
      * @param s a string comprised of any character
      * @return returns true if a palindrome (ignoring whitespace and case sensitivity), false otherwise
-     */ 	
+     */ 
+    
+    /*
      private boolean isPalindrome(String inputString) {
     	Deque<Character> charStack = new ArrayDeque<>();
     	StringBuilder result = new StringBuilder();
@@ -69,6 +71,41 @@ public class PalindromeTest {
     	    return false;
     	}
 
+    } */
+    
+    //Initial method commented out above. Updated code May 2022 to better follow instructions.
+    private boolean isPalindrome(String input) {
+    	ArrayListStack<Character> charStack = new ArrayListStack<>();
+    	ArrayListStack<Character> reverseStack = new ArrayListStack<>();
+    	int total = 0;
+    	
+    	if (input == null) {
+    		throw new IllegalArgumentException();
+    	}
+    	else {
+    		input = input.replaceAll("\\s", "");
+    		for (int i = 0; i < input.length(); i++) {
+    			charStack.push(input.charAt(i));
+    			total++;
+    		}
+    		
+    		
+    		for (int i = 0; i < total/2; i++) {
+    			reverseStack.push(charStack.pop());
+    		}
+    		
+    		if (total % 2 != 0) {
+    			charStack.pop();
+    		} 
+    	}
+    	
+    	while (!charStack.empty()) {
+    		if (Character.toLowerCase(charStack.pop()) != Character.toLowerCase(reverseStack.pop())) {
+    			return false;
+    		}	   
+    	}
+    	return true;
+  	
     } // End of method isPalindrome
 
     @Test
